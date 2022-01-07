@@ -53,6 +53,14 @@ karty[49] = "0Q_Karo";
 karty[50] = "0K_Karo";
 karty[51] = "0A_Karo";
 
+var kartyImg = [];
+for(let i=0; i<karty.length;i++){
+    let img = document.createElement("img");
+    img.setAttribute("alt", karty[i]);
+    img.setAttribute("src", 'img/cards/'+karty[i]+'.png');
+    kartyImg.push(img);
+}
+
 //--------------------Stosy kart--------------------
 var zakryte = [];
 var odkryte = [];
@@ -82,10 +90,17 @@ function start(){
     nowaGra.setAttribute("value", "Od nowa");
 
     document.getElementById("zakryte").addEventListener("click", function(){
-        for(let i=1;i<suma;i++) dobierzKarte("You");
-        dobierzKarte("You");
-        ktoTerazGra.innerText="Bot1";
-        setTimeout("bot()", 5000);
+        if(ktoTerazGra.innerText=="You"){
+            for(let i=1;i<suma;i++) dobierzKarte("You");
+            dobierzKarte("You");
+    
+            suma = 0;
+            sumaSpan.innerText = "";
+    
+            ktoTerazGra.innerText="Bot1";
+            setTimeout("bot()", 5000);
+        }
+        else alert("Nie twój ruch");
     });
 
     ktoTerazGra.innerText="You";
@@ -100,9 +115,18 @@ function start(){
         let img = stworzKatre(zakryte[i]);
 
         if(i%4==0) youCards.appendChild(img);
-        if(i%4==1) bot1Cards.appendChild(img);
-        if(i%4==2) bot2Cards.appendChild(img);
-        if(i%4==3) bot3Cards.appendChild(img);
+        if(i%4==1){
+            img.setAttribute("src", 'img/cards/background_card.png');
+            bot1Cards.appendChild(img);
+        } 
+        if(i%4==2){
+            img.setAttribute("src", 'img/cards/background_card.png');
+            bot2Cards.appendChild(img);
+        } 
+        if(i%4==3){
+            img.setAttribute("src", 'img/cards/background_card.png');
+            bot3Cards.appendChild(img);
+        } 
     }
     zakryte.splice(0,20);
     
@@ -110,19 +134,19 @@ function start(){
     zakryte.splice(0,1);
 
     let znak = odkryte[0].substring(0,2);
-    if(znak=="02" || znak=="03" || znak=="04" || znak=="0J" || znak=="0Q" || znak=="0K" || znak=="0A") start();
+    if(znak=="02" || znak=="03" || znak=="0J" || znak=="0Q" || znak=="0K" || znak=="0A") start();
 
     kartaNaWidoku.setAttribute("src", "img/cards/"+odkryte[0]+".png");
     kartaNaWidoku.setAttribute("alt", odkryte[0]);
 
-    //sprawdzeniaKarty(odkryte[0]);
     for(card of youCards.children) card.addEventListener("click", wybranieKarty);
 }
 
 //----------------Stwozrenie kart-----------------------------
 function stworzKatre(card){
-    img = document.createElement("img");
-    img.setAttribute("src", 'img/cards/'+card+'.png');
+    let img = document.createElement("img");
+    if (ktoTerazGra.innerText=="You") img.setAttribute("src", 'img/cards/'+card+'.png');
+    else img.setAttribute("src", 'img/cards/background_card.png');
     img.setAttribute("alt", card);
     return img;
 }
@@ -218,8 +242,6 @@ function bot(){
         ruchBota(bot3Cards.children);
 
         if(sprawdzWygrana(bot3Cards.children, "Bot3")) ktoTerazGra.innerText="You";
-        wyswietlKartyWConsoli(zakryte, "Zakryte");
-        wyswietlKartyWConsoli(odkryte, "Odkryte")
     }
 }
 
@@ -241,7 +263,7 @@ function ruchBota(cards){
 //---------------------------Ustawienie katy na stos która zosała zagrana--------------------
 function zmienKarte(jestKarta, zagranaKarta){
     if(jestKarta){
-        kartaNaWidoku.setAttribute("src", zagranaKarta.getAttribute("src"));
+        kartaNaWidoku.setAttribute("src", kartyImg[karty.indexOf(zagranaKarta.getAttribute('alt'))].getAttribute("src"));
         kartaNaWidoku.setAttribute("alt", zagranaKarta.getAttribute("alt"));
         odkryte.push(zagranaKarta.getAttribute("alt"));
         zagranaKarta.remove();
@@ -273,17 +295,19 @@ function sprawdzeniaKarty(wybranaKarta){
                 suma+=3;
                 sumaSpan.innerText=suma;
                 break
-            case "04":
-                suma+=4;
-                sumaSpan.innerText=suma;
-                break
             case "0Q":
                 suma=0;
                 sumaSpan.innerText="";
                 break;
             case "0J":
-                suma-=5;
-                sumaSpan.innerText=suma;
+                if(suma<=5){
+                    suma=0;
+                    sumaSpan.innerText="";
+                }
+                else{
+                    suma-=5;
+                    sumaSpan.innerText=suma;
+                }
                 break;
             case "0K":
                 suma+=5;
@@ -329,19 +353,3 @@ function resetGry(){
 
     suma=0;
 }
-
-//--------------------Pomocnicze funcje--------------------------------
-
-function wyswietlKartyWConsoli(cards, kto){
-    let napis = "Karty " + kto + " : ";
-    
-    for(let i=0; i<cards.length; i++){
-        let card = cards[i];
-        if(i!=cards.length-1) napis += card+", ";
-        else napis += card;
-
-    }
-    napis += " Ile kart zostało:"+cards.length;
-    console.log(napis);
-}
-//---------------------------------------------
