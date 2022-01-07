@@ -110,7 +110,7 @@ function start(){
     zakryte.splice(0,1);
 
     let znak = odkryte[0].substring(0,2);
-    if(znak=="02" || znak=="03" || znak=="04" || znak=="0Q" || znak=="0K" || znak=="0A") start();
+    if(znak=="02" || znak=="03" || znak=="04" || znak=="0J" || znak=="0Q" || znak=="0K" || znak=="0A") start();
 
     kartaNaWidoku.setAttribute("src", "img/cards/"+odkryte[0]+".png");
     kartaNaWidoku.setAttribute("alt", odkryte[0]);
@@ -218,6 +218,8 @@ function bot(){
         ruchBota(bot3Cards.children);
 
         if(sprawdzWygrana(bot3Cards.children, "Bot3")) ktoTerazGra.innerText="You";
+        wyswietlKartyWConsoli(zakryte, "Zakryte");
+        wyswietlKartyWConsoli(odkryte, "Odkryte")
     }
 }
 
@@ -279,6 +281,10 @@ function sprawdzeniaKarty(wybranaKarta){
                 suma=0;
                 sumaSpan.innerText="";
                 break;
+            case "0J":
+                suma-=5;
+                sumaSpan.innerText=suma;
+                break;
             case "0K":
                 suma+=5;
                 sumaSpan.innerText=suma;
@@ -330,7 +336,7 @@ function wyswietlKartyWConsoli(cards, kto){
     let napis = "Karty " + kto + " : ";
     
     for(let i=0; i<cards.length; i++){
-        let card = cards[i].getAttribute("alt");
+        let card = cards[i];
         if(i!=cards.length-1) napis += card+", ";
         else napis += card;
 
