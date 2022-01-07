@@ -66,11 +66,12 @@ var youCards = document.querySelector(".cardsYou");
 //----Obsługa ilości kart do pobrania-----------------------------------------------
 var sumaSpan = document.querySelector(".centerBoard span");
 var suma = 0;
-var bitwa = false;
 
+//-----Ostania karta jaka została zagrana--------------------------------------
 var kartaNaWidoku = document.querySelector("#odkryte");
-var ktoTerazGra = document.getElementById("ktoTeraz");
 
+//-----------Czyj ruch----------------------------------
+var ktoTerazGra = document.getElementById("ktoTeraz");
 
 //------------------Obsługa urchomienia i ponowienia gry----------------------------------------------
 var nowaGra = document.querySelector(".buttons input");
@@ -81,6 +82,7 @@ function start(){
     nowaGra.setAttribute("value", "Od nowa");
 
     document.getElementById("zakryte").addEventListener("click", function(){
+        for(let i=1;i<suma;i++) dobierzKarte("You");
         dobierzKarte("You");
         ktoTerazGra.innerText="Bot1";
         setTimeout("bot()", 5000);
@@ -108,53 +110,13 @@ function start(){
     zakryte.splice(0,1);
 
     let znak = odkryte[0].substring(0,2);
-    if(znak=="02" || znak=="03" || znak=="04" || znak=="0J" || znak=="0Q" || znak=="0K" || znak=="0A") start();
+    if(znak=="02" || znak=="03" || znak=="04" || znak=="0Q" || znak=="0K" || znak=="0A") start();
 
     kartaNaWidoku.setAttribute("src", "img/cards/"+odkryte[0]+".png");
     kartaNaWidoku.setAttribute("alt", odkryte[0]);
 
-    sprawdzeniaKarty(odkryte[0]);
+    //sprawdzeniaKarty(odkryte[0]);
     for(card of youCards.children) card.addEventListener("click", wybranieKarty);
-}
-
-function startoweBranieKart(){
-    if(suma!=0){
-        let check=true;
-        
-        for(card of youCards.children){
-            let kartaPod = kartaNaWidoku.getAttribute("alt");
-            let alt = card.getAttribute("alt");
-
-            let cardZnak = alt.substring(0,2);
-            let cardFigura = alt.substring(3, alt.length);
-            let kartaPodZnak = kartaPod.substring(0,2)
-            let kartaPodFigura = kartaPod.substring(3, kartaPod.length);
-            
-            if((cardZnak==kartaPodZnak || cardFigura==kartaPodFigura) && (cardZnak=="02" || cardZnak=="03" || cardZnak=="0K" || cardZnak=="0Q")) check=false;
-        }
-
-        if(check){
-            for(let i=0; i<suma;i++){
-                let img = stworzKatre(zakryte[0]);
-                img.addEventListener("click", wybranieKarty);
-        
-                youCards.appendChild(img);
-                zakryte.splice(0,1);
-        
-                //alert("Dodaje kartę "+img.getAttribute("alt"));
-        
-                sprawdzZakryte();
-                //alert("Ile mam kart: " + youCards.children.length);
-            }
-
-            suma=0;
-            sumaSpan.innerText = "";
-
-            ktoTerazGra.innerText="Bot1";
-            setTimeout("bot()", 5000);
-        }
-    }
-    if(ktoTerazGra.innerText=="Bot3") ktoTerazGra.innerText="You";
 }
 
 //----------------Stwozrenie kart-----------------------------
@@ -215,9 +177,6 @@ function wybranieKarty(){
    
     if(ktoTerazGra.innerText=="You" && sprawdzeniaKarty(wybranaKarta)){
         odkryte.push(wybranaKarta);
-    
-        //Wyświel zagranie
-        wyswietlZagranie(this, "you");
 
         kartaNaWidoku.setAttribute("src", "img/cards/"+wybranaKarta+".png");
         kartaNaWidoku.setAttribute("alt", wybranaKarta);
@@ -226,11 +185,10 @@ function wybranieKarty(){
 
         if(sprawdzWygrana(youCards.children, "You")){
             ktoTerazGra.innerText="Bot1";
-            //alert(ktoTerazGra.innerText);
             setTimeout("bot()", 5000);
         }
     }
-    else if(ktoTerazGra.innerText!="You")alert("Nie twój ruch");
+    else if(ktoTerazGra.innerText!="You") alert("Nie twój ruch");
     else alert("Tą kartą nie można zagrać");
 }
 
@@ -245,7 +203,6 @@ function bot(){
             ktoTerazGra.innerText="Bot2";
             setTimeout("bot()", 5000);
         }
-
     }
 
     if(kto=="Bot2"){
@@ -260,7 +217,7 @@ function bot(){
     if(kto=="Bot3"){
         ruchBota(bot3Cards.children);
 
-        if(sprawdzWygrana(bot3Cards.children, "Bot3")) startoweBranieKart();
+        if(sprawdzWygrana(bot3Cards.children, "Bot3")) ktoTerazGra.innerText="You";
     }
 }
 
@@ -275,11 +232,6 @@ function ruchBota(cards){
             break;
         }
     };
-    //Wyświel zagranie
-    if(jestKarta){
-        wyswietlKartyWConsoli(cards, "Bot3");
-        wyswietlZagranie(zagranaKarta, "Bot3");
-    } 
 
     zmienKarte(jestKarta, zagranaKarta);
 }
@@ -373,17 +325,6 @@ function resetGry(){
 }
 
 //--------------------Pomocnicze funcje--------------------------------
-function wyswietlKarty(cards, kto){
-    let napis = "<br>Karty " + kto + " : ";
-    
-    for(let i=0; i<cards.length; i++){
-        if(i!=cards.length-1) napis += cards[i]+", ";
-        else napis += cards[i];
-
-    }
-    napis += " Ile kart zostało:"+cards.length
-    document.getElementById("test").innerHTML += napis;
-}
 
 function wyswietlKartyWConsoli(cards, kto){
     let napis = "Karty " + kto + " : ";
@@ -395,11 +336,6 @@ function wyswietlKartyWConsoli(cards, kto){
 
     }
     napis += " Ile kart zostało:"+cards.length;
-    console.log(napis);
-}
-
-function wyswietlZagranie(card, kto){
-    let napis = "Zagrał " + kto + ": " + card.getAttribute("alt") + " na " + kartaNaWidoku.getAttribute("alt");
     console.log(napis);
 }
 //---------------------------------------------
