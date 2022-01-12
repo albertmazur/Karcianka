@@ -89,19 +89,7 @@ nowaGra.addEventListener("click", start);
 function start(){
     nowaGra.setAttribute("value", "Od nowa");
 
-    document.getElementById("zakryte").addEventListener("click", function(){
-        if(ktoTerazGra.innerText=="You"){
-            for(let i=1;i<suma;i++) dobierzKarte("You");
-            dobierzKarte("You");
-    
-            suma = 0;
-            sumaSpan.innerText = "";
-    
-            ktoTerazGra.innerText="Bot1";
-            setTimeout("bot()", 5000);
-        }
-        else alert("Nie twój ruch");
-    });
+    document.getElementById("zakryte").addEventListener("click", dobierzKarteZZakrytych);
 
     ktoTerazGra.innerText="You";
     
@@ -140,6 +128,22 @@ function start(){
     kartaNaWidoku.setAttribute("alt", odkryte[0]);
 
     for(card of youCards.children) card.addEventListener("click", wybranieKarty);
+}
+
+//-------------Dodowanie karty dal grasza po kliknięciu zakryte--------------------
+function dobierzKarteZZakrytych(){
+    console.log(ktoTerazGra.innerText);
+    if(ktoTerazGra.innerText=="You"){
+        for(let i=1;i<suma;i++) dobierzKarte("You");
+        dobierzKarte("You");
+
+        suma = 0;
+        sumaSpan.innerText = "";
+
+        ktoTerazGra.innerText="Bot1";
+        setTimeout("bot()", 5000);
+    }
+    else alert("Nie twój ruch nie możesz brać karty");
 }
 
 //----------------Stwozrenie kart-----------------------------
