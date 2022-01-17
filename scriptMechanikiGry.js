@@ -164,19 +164,17 @@ function dobierzKarte(kto){
     let img = stworzKatre(zakryte[0]);
     
     img.style.opacity = 0;
-    //img.classList.add("addCard");
 
     if(kto=="Ty" && ktoTerazGra.innerText=="Ty"){
         img.addEventListener("click", wybranieKarty);
-        /*setTimeout(function(){youCards.appendChild(img);}, 500);*/ youCards.appendChild(img);
+        youCards.appendChild(img);
     }
-    if(kto=="GRACZ 1")  /*setTimeout(function(){bot1Cards.appendChild(img);}, 500);*/ bot1Cards.appendChild(img);
-    if(kto=="GRACZ 2")  /*setTimeout(function(){bot2Cards.appendChild(img);}, 500);*/ bot2Cards.appendChild(img);
-    if(kto=="GRACZ 3")  /*setTimeout(function(){bot3Cards.appendChild(img);}, 500);*/ bot3Cards.appendChild(img);
+    if(kto=="GRACZ 1")  bot1Cards.appendChild(img);
+    if(kto=="GRACZ 2")  bot2Cards.appendChild(img);
+    if(kto=="GRACZ 3")  bot3Cards.appendChild(img);
     
-    setTimeout(function(){img.classList.add("addCard");}, 500)
-    //img.classList.add("addCard");
-    //img.classList.remove("addCard");
+    setTimeout(function(){img.classList.add("addCard");}, 50);
+    
     zakryte.splice(0,1);
     sprawdzZakryte();
 }
@@ -220,9 +218,10 @@ function wybranieKarty(){
         kartaNaWidoku.setAttribute("src", "img/cards/"+wybranaKarta+".png");
         kartaNaWidoku.setAttribute("alt", wybranaKarta);
         
+        this.classList.remove("addCard");
         this.classList.add("removeCard");
         let card = this;
-        setTimeout(function(){card.remove();}, 500);
+        setTimeout(function(){card.remove();}, 800);
         
         
         if(sprawdzWygrana(youCards.children, "Ty")){
@@ -285,8 +284,9 @@ function zmienKarte(jestKarta, zagranaKarta){
         kartaNaWidoku.setAttribute("alt", zagranaKarta.getAttribute("alt"));
         odkryte.push(zagranaKarta.getAttribute("alt"));
 
+        zagranaKarta.classList.remove("addCard");
         zagranaKarta.classList.add("removeCard");
-        setTimeout(function(){zagranaKarta.remove();}, 500);
+        setTimeout(function(){zagranaKarta.remove();}, 800);
     }
     else{
         for(let i=1;i<suma;i++) dobierzKarte(ktoTerazGra.innerText);

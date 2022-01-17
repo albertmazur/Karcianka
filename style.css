@@ -36,7 +36,7 @@ div{
 }
 
 .cardsYou, .cardsBot{
-    min-height: 180px;
+    min-height: 120px;
     margin-top: 30px;
 }
 
@@ -53,8 +53,11 @@ div{
 
 img{
     box-sizing: border-box;
+    width: 75px;
+}
+
+.centerBoard img, .cardsYou img{
     width: 100px;
-    /* height: 100px; */
 }
 
 .bot{
@@ -79,11 +82,7 @@ img{
 .cards{
     background-color: white;
 }
-/*
-.cardsBot img, .cardsYou img{
-    opacity: 0;
-}
-*/
+
 .cardsYou img, .zakryte{
     transition: 0.2s ease-in-out;
     cursor: pointer;
@@ -157,10 +156,10 @@ ul li span{
 
 .removeCard{
     opacity: 0;
-    transition:  0.5s opacity ease-in-out;
+    transition:  0.7s opacity ease-in-out;
 }
 
 .addCard{
     opacity: 1 !important;
-    transition:  0.5s opacity ease-in-out;
+    transition:  0.7s opacity ease-in-out;
 }
