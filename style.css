@@ -1,8 +1,11 @@
-body, html{
-    background-color: greenyellow;
+body{
     text-align: center;
-    padding-left: 1%;
-    padding-right: 1%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 100px;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 div{
@@ -13,6 +16,9 @@ div{
     /*Background pattern from sublepatterns.com*/
     background-image: url("img/background/pool_table_green.png");
     border-radius: 25px;
+    min-height: 100vh;
+    border-radius: 0;
+    margin: 0;
 }
 
 .board .center{
@@ -22,40 +28,70 @@ div{
 }
 
 .board .center .centerBoard{
-    flex: 2;
+    flex: 1;
     box-sizing: border-box;
     align-self: center;
     background-image: url("img/background/pool_table_red.png");
+    border-radius: 20px;
 }
 
-.board .center .bot{
-    flex: 1;
+.cardsYou, .cardsBot{
+    min-height: 180px;
+    margin-top: 30px;
 }
 
-h1{
-    color: green;
-    margin-bottom: 2%;
+.centerBoard > p{
+    color: white;
+    letter-spacing: 1px;
+}
+
+#ktoWygral{
+    color: darkgreen;
+    font-size: 48px;
+    font-weight: bolder;
 }
 
 img{
     box-sizing: border-box;
     width: 100px;
-    height: 100px;
+    /* height: 100px; */
 }
 
 .bot{
-    border: 1px solid black;
-    border-radius: 20px;
+    flex: 1;
     margin: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.bot > p{
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.Bot > p{
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .cards{
     background-color: white;
 }
+/*
+.cardsBot img, .cardsYou img{
+    opacity: 0;
+}
+*/
+.cardsYou img, .zakryte{
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
 
-.cardsYou img:hover, #zakryte:hover{
-    border: 2px solid blue;
-    border-radius: 20px;
+.cardsYou img:hover, .zakryte:hover{
+    transform: scale(1.2);
+    transition: 0.2s ease-in-out;
 }
 
 ul{
@@ -63,12 +99,12 @@ ul{
 }
 
 ul li{
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
 ul li span{
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -87,4 +123,44 @@ ul li span{
 .panel .figure img{
     width: 25px;
     height: 25px;
+}
+
+.buttons{
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.buttons input{
+    width: 200px;
+    height: 40px;
+    padding: 6px;
+    background-color: white;
+    text-transform: uppercase;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s ease-in-out;
+    font-weight: bold;
+    cursor: pointer;
+}
+.buttons input:hover{
+    background-color: rgb(216, 216, 216);
+    transform: scale(1.01);
+    transition: 0.2s ease-in-out;
+}
+
+.removeCard{
+    opacity: 0;
+    transition:  0.5s opacity ease-in-out;
+}
+
+.addCard{
+    opacity: 1 !important;
+    transition:  0.5s opacity ease-in-out;
 }
