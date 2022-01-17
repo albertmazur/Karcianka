@@ -66,9 +66,9 @@ var zakryte = [];
 var odkryte = [];
 
 //---------------Karty gracz----------------------------------------------------------
-var bot1Cards = document.querySelector(".cardsBot1");
-var bot2Cards = document.querySelector(".cardsBot2");
-var bot3Cards = document.querySelector(".cardsBot3");
+var bot1Cards = document.querySelector("#cardsBot1");
+var bot2Cards = document.querySelector("#cardsBot2");
+var bot3Cards = document.querySelector("#cardsBot3");
 var youCards = document.querySelector(".cardsYou");
 
 //----Obsługa ilości kart do pobrania-----------------------------------------------
@@ -77,6 +77,7 @@ var suma = 0;
 
 //-----Ostania karta jaka została zagrana--------------------------------------
 var kartaNaWidoku = document.querySelector("#odkryte");
+var imgDobieranieKart = document.querySelector("#zakryte");
 
 //-----------Czyj ruch----------------------------------
 var ktoTerazGra = document.getElementById("ktoTeraz");
@@ -91,11 +92,14 @@ function start(){
 
     document.getElementById("zakryte").addEventListener("click", dobierzKarteZZakrytych);
 
-    ktoTerazGra.innerText="You";
+    ktoTerazGra.innerText="Ty";
     
     sumaSpan.innerText = "";
 
     resetGry();
+    document.getElementById("ktoWygral").innerText=""; 
+
+    imgDobieranieKart.classList.add("zakryte");
 
     losujKarty(karty);
     
@@ -133,14 +137,14 @@ function start(){
 //-------------Dodowanie karty dal grasza po kliknięciu zakryte--------------------
 function dobierzKarteZZakrytych(){
     console.log(ktoTerazGra.innerText);
-    if(ktoTerazGra.innerText=="You"){
-        for(let i=1;i<suma;i++) dobierzKarte("You");
-        dobierzKarte("You");
+    if(ktoTerazGra.innerText=="Ty"){
+        for(let i=1;i<suma;i++) dobierzKarte("Ty");
+        dobierzKarte("Ty");
 
         suma = 0;
         sumaSpan.innerText = "";
 
-        ktoTerazGra.innerText="Bot1";
+        ktoTerazGra.innerText="GRACZ 1";
         setTimeout("bot()", 5000);
     }
     else alert("Nie twój ruch nie możesz brać karty");
@@ -149,7 +153,7 @@ function dobierzKarteZZakrytych(){
 //----------------Stwozrenie kart-----------------------------
 function stworzKatre(card){
     let img = document.createElement("img");
-    if (ktoTerazGra.innerText=="You") img.setAttribute("src", 'img/cards/'+card+'.png');
+    if (ktoTerazGra.innerText=="Ty") img.setAttribute("src", 'img/cards/'+card+'.png');
     else img.setAttribute("src", 'img/cards/background_card.png');
     img.setAttribute("alt", card);
     return img;
@@ -158,14 +162,21 @@ function stworzKatre(card){
 //-----------Dodawanie karty dla grasza------------------
 function dobierzKarte(kto){
     let img = stworzKatre(zakryte[0]);
+    
+    img.style.opacity = 0;
+    //img.classList.add("addCard");
 
-    if(kto=="You" && ktoTerazGra.innerText=="You"){
+    if(kto=="Ty" && ktoTerazGra.innerText=="Ty"){
         img.addEventListener("click", wybranieKarty);
-        youCards.appendChild(img);
+        /*setTimeout(function(){youCards.appendChild(img);}, 500);*/ youCards.appendChild(img);
     }
-    if(kto=="Bot1")  bot1Cards.appendChild(img);
-    if(kto=="Bot2")  bot2Cards.appendChild(img);
-    if(kto=="Bot3")  bot3Cards.appendChild(img);
+    if(kto=="GRACZ 1")  /*setTimeout(function(){bot1Cards.appendChild(img);}, 500);*/ bot1Cards.appendChild(img);
+    if(kto=="GRACZ 2")  /*setTimeout(function(){bot2Cards.appendChild(img);}, 500);*/ bot2Cards.appendChild(img);
+    if(kto=="GRACZ 3")  /*setTimeout(function(){bot3Cards.appendChild(img);}, 500);*/ bot3Cards.appendChild(img);
+    
+    setTimeout(function(){img.classList.add("addCard");}, 500)
+    //img.classList.add("addCard");
+    //img.classList.remove("addCard");
     zakryte.splice(0,1);
     sprawdzZakryte();
 }
@@ -203,20 +214,23 @@ function losujKarty(taliDoTasowaniem) {
 function wybranieKarty(){ 
     let wybranaKarta = this.getAttribute('alt');
    
-    if(ktoTerazGra.innerText=="You" && sprawdzeniaKarty(wybranaKarta)){
+    if(ktoTerazGra.innerText=="Ty" && sprawdzeniaKarty(wybranaKarta)){
         odkryte.push(wybranaKarta);
 
         kartaNaWidoku.setAttribute("src", "img/cards/"+wybranaKarta+".png");
         kartaNaWidoku.setAttribute("alt", wybranaKarta);
         
-        this.remove();
-
-        if(sprawdzWygrana(youCards.children, "You")){
-            ktoTerazGra.innerText="Bot1";
+        this.classList.add("removeCard");
+        let card = this;
+        setTimeout(function(){card.remove();}, 500);
+        
+        
+        if(sprawdzWygrana(youCards.children, "Ty")){
+            ktoTerazGra.innerText="GRACZ 1";
             setTimeout("bot()", 5000);
         }
     }
-    else if(ktoTerazGra.innerText!="You") alert("Nie twój ruch");
+    else if(ktoTerazGra.innerText!="Ty") alert("Nie twój ruch");
     else alert("Tą kartą nie można zagrać");
 }
 
@@ -224,28 +238,28 @@ function wybranieKarty(){
 function bot(){
     let kto = ktoTerazGra.innerText;
 
-    if(kto=="Bot1"){
+    if(kto=="GRACZ 1"){
         ruchBota(bot1Cards.children);
 
-        if(sprawdzWygrana(bot1Cards.children, "Bot1")){
-            ktoTerazGra.innerText="Bot2";
+        if(sprawdzWygrana(bot1Cards.children, "GRACZ 1")){
+            ktoTerazGra.innerText="GRACZ 2";
             setTimeout("bot()", 5000);
         }
     }
 
-    if(kto=="Bot2"){
+    if(kto=="GRACZ 2"){
         ruchBota(bot2Cards.children);
   
-        if(sprawdzWygrana(bot2Cards.children, "Bot2")){
-            ktoTerazGra.innerText="Bot3";
+        if(sprawdzWygrana(bot2Cards.children, "GRACZ 2")){
+            ktoTerazGra.innerText="GRACZ 3";
             setTimeout("bot()", 5000);
         }
     }
 
-    if(kto=="Bot3"){
+    if(kto=="GRACZ 3"){
         ruchBota(bot3Cards.children);
 
-        if(sprawdzWygrana(bot3Cards.children, "Bot3")) ktoTerazGra.innerText="You";
+        if(sprawdzWygrana(bot3Cards.children, "GRACZ 3")) ktoTerazGra.innerText="Ty";
     }
 }
 
@@ -270,7 +284,9 @@ function zmienKarte(jestKarta, zagranaKarta){
         kartaNaWidoku.setAttribute("src", kartyImg[karty.indexOf(zagranaKarta.getAttribute('alt'))].getAttribute("src"));
         kartaNaWidoku.setAttribute("alt", zagranaKarta.getAttribute("alt"));
         odkryte.push(zagranaKarta.getAttribute("alt"));
-        zagranaKarta.remove();
+
+        zagranaKarta.classList.add("removeCard");
+        setTimeout(function(){zagranaKarta.remove();}, 500);
     }
     else{
         for(let i=1;i<suma;i++) dobierzKarte(ktoTerazGra.innerText);
@@ -331,7 +347,7 @@ function sprawdzeniaKarty(wybranaKarta){
 //--------------Sprawdzenie czy ktoś wygrał------------
 function sprawdzWygrana(cards, kto){
     if(cards.length==0){
-        setTimeout("wygrana('"+kto+"')", 3000);
+        setTimeout("wygrana('"+kto+"')", 2000);
         return false;
     }
     return true;
@@ -339,9 +355,7 @@ function sprawdzWygrana(cards, kto){
 
 //-------------------Co ma się stać jeśli ktoś wygrał-----------------------------
 function wygrana(kto){
-    alert("Wygrał " + kto);
-    //document.querySelector(".centerBoard").innerHTML= "<h1>Wygrał " + kto + "</h1>";
-        
+    document.getElementById("ktoWygral").innerText="Wygrał " + kto;
     resetGry();
 }
 
@@ -356,4 +370,6 @@ function resetGry(){
     odkryte.splice(0, odkryte.length);
 
     suma=0;
+
+    imgDobieranieKart.classList.remove("zakryte");
 }
