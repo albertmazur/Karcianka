@@ -33,11 +33,12 @@ div{
     align-self: center;
     background-image: url("img/background/pool_table_red.png");
     border-radius: 20px;
+    padding-bottom: 30px;
 }
 
 .cardsYou, .cardsBot{
-    min-height: 120px;
-    margin-top: 30px;
+    min-height: 180px;
+    /*margin-top: 30px;*/
 }
 
 .centerBoard > p{
@@ -47,7 +48,7 @@ div{
 
 #ktoWygral{
     color: darkgreen;
-    font-size: 48px;
+    font-size: 44px;
     font-weight: bolder;
 }
 
@@ -61,10 +62,10 @@ img{
 }
 
 .bot{
-    flex: 1;
+    flex: 2;
     margin: 5px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    /*margin-top: 30px;
+    margin-bottom: 30px;*/
 }
 .bot > p{
     color: white;
