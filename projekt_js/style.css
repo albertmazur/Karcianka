@@ -164,3 +164,64 @@ ul li span{
     opacity: 1 !important;
     transition:  0.7s opacity ease-in-out;
 }
+
+@media screen and (max-height: 900px) {
+    img{
+        max-width: 75px;
+    }
+}
+@media screen and (max-height: 850px) {
+    .cardsYou, .cardsBot{
+        min-height: 140px;
+    }
+    #ktoWygral{
+        font-size: unset;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .centerBoard{
+        min-width: 170px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    img{
+        max-width: 60px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .center{
+        flex-direction: column;
+    }
+    .centerBoard{
+        order: 1;
+        min-width: 80%;
+    }
+    .cardsBot{
+        min-height: 90px;
+    }
+    .bot > p{
+        margin: 10px auto;
+    }
+}
+@media screen and (max-width: 400px) {
+    img{
+        max-width: 40px;
+    }
+    .center{
+        flex-direction: column;
+    }
+    .centerBoard{
+        order: 1;
+        min-width: 80%;
+        padding-right: 5px;
+    }
+    .cardsBot{
+        min-height: 50px;
+    }
+    .bot > p{
+        margin: 8px auto;
+    }
+}
