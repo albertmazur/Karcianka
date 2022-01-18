@@ -107,7 +107,7 @@ function start(){
     losujKarty(karty);
     
     for(let i=0; i<20;i++){
-        let img = stworzKatre(zakryte[i]);
+        let img = stworzKarte(zakryte[i]);
 
         if(i%4==0) youCards.appendChild(img);
         if(i%4==1){
@@ -139,7 +139,6 @@ function start(){
 
 //-------------Dodowanie karty dal grasza po kliknięciu zakryte--------------------
 function dobierzKarteZZakrytych(){
-    console.log(ktoTerazGra.innerText);
     if(ktoTerazGra.innerText==ty){
         for(let i=1;i<suma;i++) dobierzKarte(ty);
         dobierzKarte(ty);
@@ -154,7 +153,7 @@ function dobierzKarteZZakrytych(){
 }
 
 //----------------Stwozrenie kart-----------------------------
-function stworzKatre(card){
+function stworzKarte(card){
     let img = document.createElement("img");
     if (ktoTerazGra.innerText==ty) img.setAttribute("src", 'img/cards/'+card+'.png');
     else img.setAttribute("src", 'img/cards/background_card.png');
@@ -164,7 +163,7 @@ function stworzKatre(card){
 
 //-----------Dodawanie karty dla grasza------------------
 function dobierzKarte(kto){
-    let img = stworzKatre(zakryte[0]);
+    let img = stworzKarte(zakryte[0]);
     
     img.style.opacity = 0;
 

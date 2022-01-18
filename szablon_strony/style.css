@@ -1,0 +1,145 @@
+body{
+    font-size: 13px;
+    color: white;
+    background-color: #232128;
+    font-family: "Cambira Math" sans-serif;
+}
+
+header{
+    width: 100%;
+    background-color: lightgray;
+    border-bottom: 2px solid #800000;
+    text-align: center;
+    display: inline-block;
+}
+
+header h2{
+    font-weight: bold;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    text-shadow: 2px 1px black;
+    font-size: 34px;
+    margin-bottom: 0px;
+}
+
+header h4{
+    color: #800000;
+    text-transform: uppercase;
+    margin-top: 0px; 
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 5px;
+    border: 1px solid yellowgreen;
+    border-radius: 5px;
+    overflow: auto;
+    background-color: lightgray;
+}
+
+div.container div{
+    margin-right: 15px;
+    margin: 10px;
+    padding: 1px;
+    border: 1px solid darkgray;
+    border-radius: 4px; 
+    display: inline-block;
+}
+
+div.container div img{
+    max-width: 100%;
+    margin: 0px;
+    padding: 0px;
+    outline: 1px solid white; 
+}
+
+div.container div h4{
+    color: black;
+    text-transform: uppercase;
+    text-shadow: 1px 1px darkgoldenrod;
+    margin: 0px auto;
+    padding-top: 0px; 
+}
+
+div.container div p{
+    padding: 7px;
+    border: 1px solid white;
+    background-color: #800000;
+    border-radius: 3px;
+    width: 40%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.container div p.sale{
+    color: yellow;
+}
+
+div.list_container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #800000;
+    border-radius: 5px;
+    background-color: white;
+    overflow: auto;
+}
+
+div.list_container div{
+    display: inline-block;
+    margin: 10px;
+}
+
+div.list_container ul{  
+    color: lightseagreen;
+    list-style-type: none;
+    margin-top: 0px; 
+    padding: 0;
+}
+
+div.list_container div ul li{
+    text-align: center;
+    border-bottom: 1px solid lightseagreen;
+}
+
+div.list_container div ul li.li_up{
+    text-transform: uppercase;
+}
+
+div.list_container div ul li img{
+    width: 40%;
+    height: 40%;
+}
+
+div.list_container div ul li p{
+    text-transform: uppercase;
+    padding: 6px 7px;
+    border: 1px solid lightskyblue;
+}
+
+div.list_container div ul li p:hover{
+    background-color: lightsalmon;
+    color: white;
+    cursor: pointer;
+    border-color: orangered; 
+}
+
+footer p{
+    font-variant: small-caps;
+    color: blue;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center; 
+}
+
+@media only screen and (min-width: 600px) {
+    div.container div{
+        height: 240px;
+        width: 280px;
+    }
+}
