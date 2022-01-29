@@ -33,12 +33,10 @@ div{
     align-self: center;
     background-image: url("img/background/pool_table_red.png");
     border-radius: 20px;
-    padding-bottom: 30px;
 }
 
 .cardsYou, .cardsBot{
     min-height: 180px;
-    /*margin-top: 30px;*/
 }
 
 .centerBoard > p{
@@ -64,8 +62,6 @@ img{
 .bot{
     flex: 2;
     margin: 5px;
-    /*margin-top: 30px;
-    margin-bottom: 30px;*/
 }
 .bot > p{
     color: white;
@@ -155,6 +151,15 @@ ul li span{
     transition: 0.2s ease-in-out;
 }
 
+footer a{
+    color: red;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: brown;
+}
+
 .removeCard{
     opacity: 0;
     transition:  0.7s opacity ease-in-out;
@@ -174,9 +179,6 @@ ul li span{
     .cardsYou, .cardsBot{
         min-height: 140px;
     }
-    #ktoWygral{
-        font-size: unset;
-    }
 }
 
 @media screen and (max-width: 900px) {
@@ -195,13 +197,16 @@ ul li span{
     .center{
         flex-direction: column;
     }
+
     .centerBoard{
         order: 1;
         min-width: 80%;
     }
+
     .cardsBot{
         min-height: 90px;
     }
+
     .bot > p{
         margin: 10px auto;
     }
@@ -210,17 +215,21 @@ ul li span{
     img{
         max-width: 40px;
     }
+
     .center{
         flex-direction: column;
     }
+
     .centerBoard{
         order: 1;
         min-width: 80%;
         padding-right: 5px;
     }
+
     .cardsBot{
         min-height: 50px;
     }
+    
     .bot > p{
         margin: 8px auto;
     }

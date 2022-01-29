@@ -98,7 +98,7 @@ function start(){
     document.getElementById("zakryte").addEventListener("click", dobierzKarteZZakrytych);
 
     resetGry();
-    document.getElementById("ktoWygral").innerText=""; 
+    if(document.querySelector("#ktoWygral")!=null)  document.querySelector("#ktoWygral").remove(); 
 
     ktoTerazGra.innerText=ty;
 
@@ -189,7 +189,10 @@ function sprawdzZakryte(){
         zakryte.splice(zakryte.indexOf(odkryte[0]), 1);
     }
     if(zakryte.length==0 && odkryte.length==1){
-        document.getElementById("ktoWygral").innerText="Koniec gry brak kart w tali. Zagraj od nowa";
+        let ktoWygral = document.createElement("p");
+        ktoWygral.id="ktoWygral";
+        ktoWygral.innerText="Koniec gry brak kart w tali. Zagraj od nowa";
+        document.querySelector(".centerBoard").insertBefore(ktoWygral, document.querySelector(".centerBoard p"));
         resetGry();
     }
 }
@@ -365,7 +368,10 @@ function wygrana(kto){
     let napis;
     if(kto==ty) napis = "Wygrałeś";
     else napis = "Wygrał " + kto;
-    document.getElementById("ktoWygral").innerText=napis;
+    let ktoWygral = document.createElement("p");
+    ktoWygral.id="ktoWygral";
+    ktoWygral.innerText=napis;
+    document.querySelector(".centerBoard").insertBefore(ktoWygral, document.querySelector(".centerBoard p"));
     resetGry();
 }
 

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karcianka</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="icon" href="img/ico.png">
 </head>
 <body>
     <div class="board">
-        <div class="bot">
+        <div class="bot player2">
             <p>Gracz 2</p>
             <div id="cardsBot2" class="cardsBot"></div>
         </div>
@@ -20,8 +20,7 @@
                 <div id="cardsBot1" class="cardsBot"></div>
             </div>
             <div class="centerBoard">
-                <p id="ktoWygral"></p>
-                <p>Suma kart: <span id="suma"></span></p><br>
+                <p>Suma kart: <span id="suma"></span></p>
                 <img id="zakryte" src="img/cards/background_card.png" alt="card">
                 <img id="odkryte" src="img/cards/background_card.png" alt="card">
                 <p>Ruch grasza: <span id="ktoTeraz"></span></p>
@@ -57,9 +56,10 @@
             <li><span>Karty nie funkcyjne</span> - 4, 5, 6, 7, 8, 9, 10.</li>
         </ul>
     </div>
-    <script src="scriptMechanikiGry.js"></script>
     <footer>
-        <p>Autor grakiki kart:<a target="_blank" href="http://www.freepik.com">Designed by macrovector / Freepik</a></p>
+        <p>Autor grafiki kart: <a target="_blank" href="http://www.freepik.com">Designed by macrovector / Freepik</a></p>
     </footer>
+    <script src="scriptMechanikiGry.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
