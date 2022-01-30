@@ -1,3 +1,14 @@
+//---------------Wygląd strony---------------------------
+var player2 = this.document.querySelector(".player2");
+if(this.window.innerWidth<=500)  this.document.querySelector(".center").insertBefore(player2, this.document.querySelector(".centerBoard"));
+else    this.document.querySelector(".board").insertBefore(player2, this.document.querySelector(".center"));
+
+window.addEventListener("resize", function() {
+    if(this.window.innerWidth<=500)  this.document.querySelector(".center").insertBefore(player2, this.document.querySelector(".centerBoard"));
+    else    this.document.querySelector(".board").insertBefore(player2, this.document.querySelector(".center"));
+})
+
+//-----------------Nazwy kart--------------------------------
 var karty = [];
 
 karty[0] = "02_Trefl";
@@ -54,12 +65,6 @@ karty[50] = "0K_Karo";
 karty[51] = "0A_Karo";
 
 var kartyImg = [];
-for(let i=0; i<karty.length;i++){
-    let img = document.createElement("img");
-    img.setAttribute("alt", karty[i]);
-    img.setAttribute("src", 'img/cards/'+karty[i]+'.png');
-    kartyImg.push(img);
-}
 
 //----------------Nazwy graszy------------------------
 var gracz1 = "GRACZ 1";
@@ -93,6 +98,15 @@ nowaGra.addEventListener("click", start);
 
 //-------------------------Start gry----------------------------
 function start(){
+    if(nowaGra.value=="Start"){
+        for(let i=0; i<karty.length;i++){
+            let img = document.createElement("img");
+            img.setAttribute("alt", karty[i]);
+            img.setAttribute("src", 'img/cards/'+karty[i]+'.png');
+            kartyImg.push(img);
+        }
+    }
+
     nowaGra.setAttribute("value", "Od nowa");
 
     document.getElementById("zakryte").addEventListener("click", dobierzKarteZZakrytych);
@@ -147,7 +161,7 @@ function dobierzKarteZZakrytych(){
         sumaSpan.innerText = "";
 
         ktoTerazGra.innerText=gracz1;
-        setTimeout("bot()", 5000);
+        setTimeout("bot()", 2000);
     }
     else alert("Nie twój ruch nie możesz brać karty");
 }
@@ -232,7 +246,7 @@ function wybranieKarty(){
         let card = this;
         setTimeout(function(){card.remove(); sprawdzWygrana(ktoTerazGra.innerText);}, 800);
         
-        setTimeout("bot()", 5000);
+        setTimeout("bot()", 2000);
     }
     else if(ktoTerazGra.innerText!=ty) alert("Nie twój ruch");
     else alert("Tą kartą nie można zagrać");
@@ -244,12 +258,12 @@ function bot(){
 
     if(kto==gracz1){
         ruchBota(bot1Cards.children);
-        setTimeout("bot()", 5000);
+        setTimeout("bot()", 2000);
     }
 
     if(kto==gracz2){
         ruchBota(bot2Cards.children);
-        setTimeout("bot()", 5000);
+        setTimeout("bot()", 2000);
     }
 
     if(kto==gracz3) ruchBota(bot3Cards.children);

@@ -15,7 +15,6 @@ div{
 .board{
     /*Background pattern from sublepatterns.com*/
     background-image: url("img/background/pool_table_green.png");
-    border-radius: 25px;
     min-height: 100vh;
     border-radius: 0;
     margin: 0;
@@ -61,7 +60,6 @@ img{
 
 .bot{
     flex: 2;
-    margin: 5px;
 }
 .bot > p{
     color: white;
@@ -187,7 +185,7 @@ footer a:hover{
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1100px) {
     img{
         max-width: 60px;
     }
