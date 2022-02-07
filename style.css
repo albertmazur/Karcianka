@@ -4,6 +4,7 @@ body{
     text-align: center;
     display: inline-flex;
     flex-direction: column;
+    margin-bottom: 100px;
 }
 
 div{
