@@ -1,81 +1,98 @@
 body{
-    text-align: center;
-    width: 100%;
-    padding: 0;
+    background-color: #eef4d5;
     margin: 0;
-    padding-bottom: 100px;
+    text-align: center;
     display: inline-flex;
     flex-direction: column;
 }
 
 div{
-    margin: 2px;
+    margin: 5px;
+}
+
+#cardsBot2 img{
+    max-width: 85px;
+}
+#cardsBot1 img, #cardsBot3 img{
+    max-height: 85px;
 }
 
 .board{
     /*Background pattern from sublepatterns.com*/
     background-image: url("img/background/pool_table_green.png");
-    min-height: 100vh;
-    border-radius: 0;
     margin: 0;
+    padding: 0;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.board p{
+    color: white;
+    letter-spacing: 1px;
+    margin: 10px;
+}
+
+#ktoTeraz{
+    font-size: 26px;
 }
 
 .board .center{
     display: flex;
     justify-content: center;
-    align-items: stretch;
-}
-
-.board .center .centerBoard{
-    flex: 1;
-    box-sizing: border-box;
-    align-self: center;
-    background-image: url("img/background/pool_table_red.png");
-    border-radius: 20px;
-}
-
-.cardsYou, .cardsBot{
-    min-height: 180px;
-}
-
-.centerBoard > p{
-    color: white;
-    letter-spacing: 1px;
-}
-
-#ktoWygral{
-    color: darkgreen;
-    font-size: 44px;
-    font-weight: bolder;
-}
-
-img{
-    box-sizing: border-box;
-    width: 75px;
-}
-
-.centerBoard img, .cardsYou img{
-    width: 100px;
-}
-
-.bot{
     flex: 2;
-}
-.bot > p{
-    color: white;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.Bot > p{
-    color: white;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    flex-direction: row;
 }
 
-.cards{
-    background-color: white;
+.centerBoard{
+    background-image: url("img/background/pool_table_red.png");
+    align-self: center;
+    box-sizing: border-box;
+    padding: 10px 10px 0px 10px;
+    border-radius: 20px;
+    flex: 1;
+    min-height: 280px;
+}
+
+.player1 {
+    justify-content: end;
+}
+
+.player1 p{
+    writing-mode: tb;
+    order: 2;
+}
+
+#cardsBot1, #cardsBot3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 500px;
+    flex-wrap: wrap;
+}
+
+#cardsBot1{
+    align-content: flex-end;
+}
+
+#cardsBot3{
+    align-content: flex-start;
+}
+.player2{
+    flex: 1;
+    min-height: 190px;
+}
+
+.player3, .player1{
+    display: flex;
+    flex: 1;
+}
+
+.player3 p{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
 }
 
 .cardsYou img, .zakryte{
@@ -86,6 +103,22 @@ img{
 .cardsYou img:hover, .zakryte:hover{
     transform: scale(1.2);
     transition: 0.2s ease-in-out;
+}
+
+.bot p, .you p{
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.you{
+    flex: 1;
+    min-height: 220px;
+}
+
+#ktoWygral{
+    color: darkgreen;
+    font-size: 40px;
+    font-weight: bolder;
 }
 
 ul{
@@ -102,23 +135,6 @@ ul li span{
     font-weight: bold;
 }
 
-.panel{
-    display: flex;
-    justify-content: center;
-}
-
-.panel .figure{
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    padding: 2px;
-}
-
-.panel .figure img{
-    width: 25px;
-    height: 25px;
-}
-
 .buttons{
     position: fixed;
     bottom: 0px;
@@ -129,7 +145,9 @@ ul li span{
     margin: 0;
     padding-top: 20px;
     padding-bottom: 20px;
+    z-index: 1;
 }
+
 .buttons input{
     width: 200px;
     height: 40px;
@@ -143,6 +161,7 @@ ul li span{
     font-weight: bold;
     cursor: pointer;
 }
+
 .buttons input:hover{
     background-color: rgb(216, 216, 216);
     transform: scale(1.01);
@@ -168,67 +187,58 @@ footer a:hover{
     transition:  0.7s opacity ease-in-out;
 }
 
-@media screen and (max-height: 900px) {
-    img{
+@media screen and (max-width: 1500px) {
+    #cardsBot2 img{
         max-width: 75px;
     }
-}
-@media screen and (max-height: 850px) {
-    .cardsYou, .cardsBot{
-        min-height: 140px;
+
+    #cardsBot1 img, #cardsBot3 img{
+        max-height: 75px;
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 700px) {
+    div{
+        margin: 2px;
+    }
+
+    #cardsBot1, #cardsBot3{
+        height: 350px;
+    }
+
+    .player2{
+        min-height: 130px;
+    }
+
+    .cardsYou{
+        min-height: 150px;
+    }
+
+    .board{
+        min-height: 680px;
+    }
+
     .centerBoard{
-        min-width: 170px;
+        min-height: 210px
     }
-}
 
-@media screen and (max-width: 1100px) {
-    img{
+    #ktoTeraz{
+        font-size: 22px;
+    }
+
+    .board .center .centerBoard{
+        padding: 5px 5px 0px 5px;
+    }
+
+    #cardsBot2 img, .centerBoard img{
+        max-width: 50px;
+    }
+
+    #cardsBot1 img, #cardsBot3 img{
+        max-height: 50px;
+    }
+
+    .cardsYou img, .centerBoard img{
         max-width: 60px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .center{
-        flex-direction: column;
-    }
-
-    .centerBoard{
-        order: 1;
-        min-width: 80%;
-    }
-
-    .cardsBot{
-        min-height: 90px;
-    }
-
-    .bot > p{
-        margin: 10px auto;
-    }
-}
-@media screen and (max-width: 400px) {
-    img{
-        max-width: 40px;
-    }
-
-    .center{
-        flex-direction: column;
-    }
-
-    .centerBoard{
-        order: 1;
-        min-width: 80%;
-        padding-right: 5px;
-    }
-
-    .cardsBot{
-        min-height: 50px;
-    }
-    
-    .bot > p{
-        margin: 8px auto;
     }
 }

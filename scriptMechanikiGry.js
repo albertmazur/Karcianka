@@ -1,13 +1,3 @@
-//---------------Wygląd strony---------------------------
-var player2 = this.document.querySelector(".player2");
-if(this.window.innerWidth<=500)  this.document.querySelector(".center").insertBefore(player2, this.document.querySelector(".centerBoard"));
-else    this.document.querySelector(".board").insertBefore(player2, this.document.querySelector(".center"));
-
-window.addEventListener("resize", function() {
-    if(this.window.innerWidth<=500)  this.document.querySelector(".center").insertBefore(player2, this.document.querySelector(".centerBoard"));
-    else    this.document.querySelector(".board").insertBefore(player2, this.document.querySelector(".center"));
-})
-
 //-----------------Nazwy kart--------------------------------
 var karty = [];
 
@@ -125,7 +115,7 @@ function start(){
 
         if(i%4==0) youCards.appendChild(img);
         if(i%4==1){
-            img.setAttribute("src", 'img/cards/background_card.png');
+            img.setAttribute("src", 'img/cards/background_card_reverse.png');
             bot1Cards.appendChild(img);
         } 
         if(i%4==2){
@@ -133,7 +123,7 @@ function start(){
             bot2Cards.appendChild(img);
         } 
         if(i%4==3){
-            img.setAttribute("src", 'img/cards/background_card.png');
+            img.setAttribute("src", 'img/cards/background_card_reverse.png');
             bot3Cards.appendChild(img);
         } 
     }
@@ -185,9 +175,15 @@ function dobierzKarte(kto){
         img.addEventListener("click", wybranieKarty);
         youCards.appendChild(img);
     }
-    if(kto==gracz1)  bot1Cards.appendChild(img);
+    if(kto==gracz1){
+        img.setAttribute("src", 'img/cards/background_card_reverse.png');
+        bot1Cards.appendChild(img);
+    }  
     if(kto==gracz2)  bot2Cards.appendChild(img);
-    if(kto==gracz3)  bot3Cards.appendChild(img);
+    if(kto==gracz3){
+        img.setAttribute("src", 'img/cards/background_card_reverse.png');
+        bot3Cards.appendChild(img);
+    }  
     
     setTimeout(function(){img.classList.add("addCard");}, 50);
     
@@ -279,7 +275,7 @@ function ruchBota(cards){
             zagranaKarta = card;
             break;
         }
-    };
+    }
 
     zmienKarte(jestKarta, zagranaKarta);
 }
@@ -296,7 +292,7 @@ function zmienKarte(jestKarta, zagranaKarta){
         setTimeout(function(){zagranaKarta.remove(); sprawdzWygrana(ktoTerazGra.innerText);}, 800);
     }
     else{
-        for(let i=1;i<suma;i++) dobierzKarte(ktoTerazGra.innerText);
+        for(let i=1; i<suma; i++) dobierzKarte(ktoTerazGra.innerText);
         dobierzKarte(ktoTerazGra.innerText); 
         suma=0;
         sumaSpan.innerText="";
@@ -352,8 +348,27 @@ function sprawdzeniaKarty(wybranaKarta){
     else return false;
 }
 
+//------------------------setSizeCards-----------------------------
+function setSizeCards(kto){
+    let cards = [];
+    if(kto==gracz1) cards = bot1Cards.children;
+    if(kto==gracz2) cards = bot2Cards.children;
+    if(kto==gracz3) cards = bot3Cards.children;
+    
+    let w = "";
+    if(cards.length>5) w = "25px";
+    else w = "50px";
+    
+    for(let card of cards){
+        if(kto==gracz2) card.style.width=w;
+        else card.style.height=w;
+    }
+}
+
 //--------------Sprawdzenie czy ktoś wygrał------------
 function sprawdzWygrana(kto){
+    if(window.innerWidth<=700) setSizeCards(kto);
+
     let cards;
     switch(kto){
         case ty:
@@ -406,3 +421,28 @@ function resetGry(){
 
     imgDobieranieKart.classList.remove("zakryte");
 }
+
+window.addEventListener("resize", function(){
+    if(window.innerWidth<=700){
+        if(bot1Cards.children.length>5){   
+          for(let card of bot1Cards.children){
+            card.style.height = "25px";
+          }
+        }
+        if(bot2Cards.children.length>5){
+            for(let card of bot2Cards.children.length){
+                card.style.width = "25px";
+            }
+        }
+        if(bot3Cards.children.length>5){
+            for(let card of bot3Cards.children){
+                card.style.height = "25px";
+            }
+        }
+    }
+    else{
+        for(let card of bot1Cards.children) card.style.height = "";
+        for(let card of bot2Cards.children) card.style.width = "";
+        for(let card of bot3Cards.children) card.style.height = "";
+    }
+});

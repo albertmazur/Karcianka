@@ -12,34 +12,28 @@
     <div class="board">
         <div class="bot player2">
             <p>Gracz 2</p>
-            <div id="cardsBot2" class="cardsBot"></div>
+            <div id="cardsBot2" ></div>
         </div>
         <div class="center">
-            <div class="bot">
+            <div class="bot player1">
                 <p>Gracz 1</p>
-                <div id="cardsBot1" class="cardsBot"></div>
+                <div id="cardsBot1"></div>
             </div>
             <div class="centerBoard">
                 <p>Suma kart: <span id="suma"></span></p>
                 <img id="zakryte" src="img/cards/background_card.png" alt="card">
                 <img id="odkryte" src="img/cards/background_card.png" alt="card">
-                <p>Ruch grasza: <span id="ktoTeraz"></span></p>
+                <p>Ruch grasza:</p><p id="ktoTeraz"></p>
             </div>
-            <div class="bot">
+            <div class="bot player3">
                 <p>Gracz 3</p>
-                <div id="cardsBot3" class="cardsBot"></div>
+                <div id="cardsBot3"></div>    
             </div>
         </div>
-        <div class="Bot">
-            <div class="panel">
-                <div class="figure"><img src="img/cards/Pik.png" alt="Pik"></div>
-                <div class="figure"><img src="img/cards/Karo.png" alt="Karo"></div>
-                <div class="figure"><img src="img/cards/Kier.png" alt="Kier"></div>
-                <div class="figure"><img src="img/cards/Trefl.png" alt="Trefl"></div>
+            <div class="you">
+                <p>Ty</p>
+                <div class="cardsYou"></div>
             </div>
-            <p>Ty</p>
-            <div class="cardsYou"></div>
-        </div> 
     </div>
     <div class="buttons">
         <input type="button" value="Start">
@@ -60,6 +54,5 @@
         <p>Autor grafiki kart: <a target="_blank" href="http://www.freepik.com">Designed by macrovector / Freepik</a></p>
     </footer>
     <script src="scriptMechanikiGry.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
