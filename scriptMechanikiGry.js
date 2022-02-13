@@ -365,9 +365,26 @@ function setSizeCards(kto){
     }
 }
 
+function setSizeCards2(kto){
+    let cards = [];
+    if(kto==gracz1) cards = bot1Cards.children;
+    if(kto==gracz2) cards = bot2Cards.children;
+    if(kto==gracz3) cards = bot3Cards.children;
+    
+    let w = "";
+    if(cards.length>5) w = "50px";
+    else w = "75px";
+    
+    for(let card of cards){
+        if(kto==gracz2) card.style.width=w;
+        else card.style.height=w;
+    }
+}
+
 //--------------Sprawdzenie czy ktoś wygrał------------
 function sprawdzWygrana(kto){
     if(window.innerWidth<=700) setSizeCards(kto);
+    if(window.innerWidth>700 && window.innerWidth<=1500) setSizeCards2(kto);
 
     let cards;
     switch(kto){
@@ -439,6 +456,23 @@ window.addEventListener("resize", function(){
                 card.style.height = "25px";
             }
         }
+    }
+    else if(window.innerWidth>700 && window.innerWidth<=1500){
+        if(bot1Cards.children.length>5){   
+            for(let card of bot1Cards.children){
+              card.style.height = "50px";
+            }
+          }
+          if(bot2Cards.children.length>5){
+              for(let card of bot2Cards.children.length){
+                  card.style.width = "50px";
+              }
+          }
+          if(bot3Cards.children.length>5){
+              for(let card of bot3Cards.children){
+                  card.style.height = "50px";
+              }
+          }
     }
     else{
         for(let card of bot1Cards.children) card.style.height = "";
