@@ -21,8 +21,9 @@ div{
 .board{
     /*Background pattern from sublepatterns.com*/
     background-image: url("img/background/pool_table_green.png");
-    margin: 0;
+    margin: 10px;
     padding: 0;
+    border-radius: 100px;
     min-height: 900px;
     display: flex;
     flex-direction: column;
