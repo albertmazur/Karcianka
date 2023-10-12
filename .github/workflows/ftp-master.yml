@@ -14,7 +14,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
-          server-dir: /public_html/projects/Karcianka
+          server-dir: /public_html/projects/Karcianka/
           server: ${{ secrets.host }}
           username: ${{ secrets.user }}
           password: ${{ secrets.password }}
