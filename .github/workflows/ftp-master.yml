@@ -1,5 +1,7 @@
 on:
   push:
+    paths-ignore:
+      - 'README.md'
     branches:
       - master
 name: 🚀 Deploy PRODUCT VERSION website
